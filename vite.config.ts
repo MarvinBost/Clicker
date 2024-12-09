@@ -10,6 +10,7 @@ export default defineConfig(({mode}) => {
   const processEnv: {[key: string]: string} = {};
   cherryPickedKeys.forEach((key) => (processEnv[key] = env[key]));
   return {
+    base: "/Clicker/",
     define: {
       "process.env": processEnv,
     },
