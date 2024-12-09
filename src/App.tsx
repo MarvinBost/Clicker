@@ -16,32 +16,31 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
   const handleClick = () => {
-    let experience = 10;
-    let money = 10;
+  let experience = 10;
+  let money = 10;
 
-    // Application des améliorations
-    const xpBonus =
-      upgrades.boostXP.level > 0
-        ? upgrades.boostXP.bonus ** upgrades.boostXP.level
-        : 1;
-    const moneyBonus =
-      upgrades.boostMoney.level > 0
-        ? upgrades.boostMoney.bonus ** upgrades.boostMoney.level
-        : 1;
+  // Application des améliorations avec croissance modérée
+  const xpBonus = Math.min(
+    upgrades.boostXP.level > 0 ? 1 + upgrades.boostXP.level * 0.2 : 1,
+    5 // Limite maximale de x5
+  );
+  const moneyBonus = Math.min(
+    upgrades.boostMoney.level > 0 ? 1 + upgrades.boostMoney.level * 0.2 : 1,
+    5 // Limite maximale de x5
+  );
 
-    money += level * 10;
-    experience *= xpBonus;
-    money *= moneyBonus;
+  // Application des multiplicateurs
+  const runeEffect = units.runes > 0 ? Math.sqrt(units.runes) : 1;
 
-    if (units.runes > 0) {
-      experience *= units.runes;
-      money *= units.runes;
-    }
+  money += level * 10 * moneyBonus * runeEffect;
+  experience *= xpBonus * runeEffect;
 
-    dispatch(increment(1));
-    dispatch(gainExperience(experience));
-    dispatch(addMoney(money));
-  };
+  // Dispatch des gains
+  dispatch(increment(1));
+  dispatch(gainExperience(experience));
+  dispatch(addMoney(money));
+};
+
 
   const buyUpgradeHandler = (upgradeKey: UpgradeType) => {
     const upgrade = upgrades[upgradeKey];
