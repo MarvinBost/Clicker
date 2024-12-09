@@ -53,7 +53,6 @@ const saveStateToLocalStorage = (state: unknown) => {
     const hash = hashState(state);
     localStorage.setItem("appState", encryptedState);
     localStorage.setItem("appStateHash", hash);
-    console.log("State saved to localStorage");
   } catch (e) {
     console.error("Could not save state to localStorage:", e);
   }
