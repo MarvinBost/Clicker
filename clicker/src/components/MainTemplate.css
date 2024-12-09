@@ -1,0 +1,26 @@
+.main-template {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 100vh;
+  text-align: center;
+}
+
+.main-template h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.main-template .button {
+  margin-top: 10px;
+}
+
+.main-template .stats-panel {
+  margin-top: 30px;
+}
+
+@media (max-width: 600px) {
+  .main-template {
+    padding: 10px;
+  }
+}
