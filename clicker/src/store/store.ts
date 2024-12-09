@@ -11,21 +11,34 @@ import {
 } from "@store/features";
 import CryptoJS from "crypto-js";
 
-const hashState = (state: any) => {
+const ENCRYPTION_KEY = process.env.REACT_APP_ENCRYPTION_KEY || "default";
+
+const hashState = (state: unknown) => {
   return CryptoJS.SHA256(JSON.stringify(state)).toString();
+};
+
+const encryptState = (state: unknown) => {
+  const serializedState = JSON.stringify(state);
+  return CryptoJS.AES.encrypt(serializedState, ENCRYPTION_KEY).toString();
+};
+
+const decryptState = (encryptedState: string) => {
+  const bytes = CryptoJS.AES.decrypt(encryptedState, ENCRYPTION_KEY);
+  const decryptedState = bytes.toString(CryptoJS.enc.Utf8);
+  return JSON.parse(decryptedState);
 };
 
 const loadStateFromLocalStorage = () => {
   try {
-    const serializedState = localStorage.getItem("appState");
+    const encryptedState = localStorage.getItem("appState");
     const serializedHash = localStorage.getItem("appStateHash");
-    if (serializedState && serializedHash) {
-      const state = JSON.parse(serializedState);
+    if (encryptedState && serializedHash) {
+      const state = decryptState(encryptedState);
       const hash = hashState(state);
       if (hash === serializedHash) {
         return state;
       } else {
-        console.warn("You cheated! State has been reset.");
+        console.warn("State was modified, ignoring it");
       }
     }
   } catch (e) {
@@ -34,12 +47,13 @@ const loadStateFromLocalStorage = () => {
   return {};
 };
 
-const saveStateToLocalStorage = (state: any) => {
+const saveStateToLocalStorage = (state: unknown) => {
   try {
-    const serializedState = JSON.stringify(state);
+    const encryptedState = encryptState(state);
     const hash = hashState(state);
-    localStorage.setItem("appState", serializedState);
+    localStorage.setItem("appState", encryptedState);
     localStorage.setItem("appStateHash", hash);
+    console.log("State saved to localStorage");
   } catch (e) {
     console.error("Could not save state to localStorage:", e);
   }
