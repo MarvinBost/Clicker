@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-type LevelState = {
+export type LevelState = {
   current: number;
   experience: number;
   maxExperience: number;

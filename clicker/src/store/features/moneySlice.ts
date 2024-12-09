@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 // Type pour l'état de l'argent
-type MoneyState = {
+export type MoneyState = {
   amount: number;
 };
 

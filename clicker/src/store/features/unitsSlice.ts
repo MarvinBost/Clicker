@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import {RootState} from "@store/store";
 import {subtractMoney} from "./moneySlice";
 
-type UnitsState = {
+export type UnitsState = {
   apprentices: number;
   dragons: number;
 };

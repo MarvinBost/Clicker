@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-type ScoreState = {
+export type ScoreState = {
   value: number;
 };
 
