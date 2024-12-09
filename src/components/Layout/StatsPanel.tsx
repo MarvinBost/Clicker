@@ -5,6 +5,8 @@ import { Progress } from "@components/UI/progress";
 type StatsPanelProps = {
   score: number;
   level: number;
+  experience: number;
+  maxExperience: number;
   units: {apprentices: number; runes: number; dragons: number};
   money: number;
   upgrades: {
@@ -21,10 +23,11 @@ const StatsPanel: React.FC<StatsPanelProps> = ({
   level,
   units,
   money,
+  experience,
+  maxExperience,
   upgrades,
 }) => {
-  const maxLevel = 100; // Assuming a max level of 100, adjust as needed
-  const progressPercentage = (level / maxLevel) * 100;
+  const progressPercentage = (experience / maxExperience) * 100;
 
   return (
     <Card className="w-full max-w-3xl mx-auto bg-gray-900 text-white">

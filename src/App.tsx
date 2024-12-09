@@ -12,6 +12,8 @@ function App() {
   const level = useSelector((state: RootState) => state.level.current);
   const units = useSelector((state: RootState) => state.units);
   const money = useSelector((state: RootState) => state.money.amount);
+  const experience = useSelector((state: RootState) => state.level.experience);
+  const maxExperience = useSelector((state: RootState) => state.level.maxExperience);
   const upgrades = useSelector((state: RootState) => state.upgrades.upgrades);
   const [error, setError] = useState<string | null>(null);
 
@@ -124,6 +126,8 @@ function App() {
         level={level}
         units={units}
         money={money}
+        experience={experience}
+        maxExperience={maxExperience}
         upgrades={upgrades}
         handleClick={handleClick}
         buyUpgrade={buyUpgradeHandler}
