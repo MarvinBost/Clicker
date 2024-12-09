@@ -4,21 +4,25 @@ import {subtractMoney} from "./moneySlice";
 
 export type UnitsState = {
   apprentices: number;
+  runes: number;
   dragons: number;
 };
 
 const initialState: UnitsState = {
   apprentices: 0,
+  runes: 0,
   dragons: 0,
 };
 
 const unitPrices = {
   apprentices: 1000,
+  runes: 10000,
   dragons: 1000000,
 };
 
 enum UnitsTranslationFR {
   apprentices = "apprenti",
+  runes = "runes",
   dragons = "dragon",
 }
 
@@ -39,7 +43,7 @@ export const buyUnit = createAsyncThunk(
       return {unit, count};
     } else {
       throw new Error(
-        `Pas assez d'argent pour acheter un ${UnitsTranslationFR[unit]}`
+        `Pas assez d'argent pour acheter un(e) ${UnitsTranslationFR[unit]}`
       );
     }
   }

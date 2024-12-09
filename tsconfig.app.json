@@ -23,10 +23,11 @@
     "noUncheckedSideEffectImports": true,
 
     /* Aliases */
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@store/*": ["store/*"],
-      "@components/*": ["components/*"],
+      "@/*": ["./src/*"],
+      "@store/*": ["./src/store/*"],
+      "@components/*": ["./src/components/*"],
     }
   },
   "include": ["src"],

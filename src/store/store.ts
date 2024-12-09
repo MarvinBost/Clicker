@@ -4,10 +4,12 @@ import {
   levelReducer,
   unitsReducer,
   moneyReducer,
+  upgradesReducer,
   ScoreState,
   LevelState,
   UnitsState,
   MoneyState,
+  UpgradeState,
 } from "@store/features";
 import CryptoJS from "crypto-js";
 
@@ -65,12 +67,14 @@ export const store = configureStore({
     level: levelReducer,
     units: unitsReducer,
     money: moneyReducer,
+    upgrades: upgradesReducer,
   },
   preloadedState: loadStateFromLocalStorage() as {
     score: ScoreState;
     level: LevelState;
     units: UnitsState;
     money: MoneyState;
+    upgrades: UpgradeState;
   },
 });
 
